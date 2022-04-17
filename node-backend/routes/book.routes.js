@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const bookRoute = express.Router();
 let Book = require("../model/Book");
-
 // Add Book
 bookRoute.route("/add-book").post((req, res, next) => {
   Book.create(req.body, (error, data) => {
@@ -13,8 +12,7 @@ bookRoute.route("/add-book").post((req, res, next) => {
     }
   });
 });
-
-// Get all Books
+// Get all Book
 bookRoute.route("/").get((req, res) => {
   Book.find((error, data) => {
     if (error) {
@@ -24,9 +22,8 @@ bookRoute.route("/").get((req, res) => {
     }
   });
 });
-
 // Get Book
-bookRoute.route(".read-book/:id").get((req, res) => {
+bookRoute.route("/read-book/:id").get((req, res) => {
   Book.findById(req.params.id, (error, data) => {
     if (error) {
       return next(error);
@@ -37,7 +34,7 @@ bookRoute.route(".read-book/:id").get((req, res) => {
 });
 
 // Update Book
-bookRoute.route("./update-book/:id").put((req, res, next) => {
+bookRoute.route("/update-book/:id").put((req, res, next) => {
   Book.findByIdAndUpdate(
     req.params.id,
     {
@@ -45,16 +42,15 @@ bookRoute.route("./update-book/:id").put((req, res, next) => {
     },
     (error, data) => {
       if (error) {
-        console.log(error);
         return next(error);
+        console.log(error);
       } else {
         res.json(data);
-        console.log("Book updated successfully");
+        console.log("Book updated successfully!");
       }
     }
   );
 });
-
 // Delete Book
 bookRoute.route("/delete-book/:id").delete((req, res, next) => {
   Book.findByIdAndRemove(req.params.id, (error, data) => {
