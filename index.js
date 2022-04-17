@@ -56,7 +56,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist/angular-mean-app/index.html"));
 });
 
-// error handler
+// Error handler
 app.use(function (err, req, res, next) {
   console.error(err.message);
   if (!err.statusCode) err.statusCode = 500;
